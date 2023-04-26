@@ -19,9 +19,11 @@ def retornar_todos():
 # 2 criar rota para retornar um produto específico por id  
 @app.route('/products/<int:id>', methods=['GET'])
 def buscar_por_id(id:int):
-    for chaves, valores in repository.produtos.items():
-       if chaves == id: 
-        return jsonify(f'{chaves} = {valores}')
+    for chave, valores in repository.produtos.items():
+       if chave == id: 
+        body = repository.produtos[id]
+        #return jsonify(f'{chave} = {valores}')
+        return jsonify(body)
     
     return jsonify({'Mensagem': "Produto não encontrado"})
 

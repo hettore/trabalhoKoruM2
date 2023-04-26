@@ -26,3 +26,4 @@ Miguel de Jesus
   
 5 - DELETE/produtos/<id>
   a - Deleta um produto com um determinado id
+
