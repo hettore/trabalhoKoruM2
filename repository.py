@@ -20,7 +20,15 @@ def gerar_id():
 # função para criar um produto a a partir de requisição post em json
 def criar_produto():
     body = request.json
-    produtos[gerar_id()] = body
+    id = gerar_id()
+    produtos[id] = {
+        'id': id,
+        'nome': request.json["nome"],
+        'preco': request.json["preco"],
+        'peso': request.json["peso"],
+        'descricao': request.json["descricao"],
+        'fornecedor': request.json["fornecedor"]
+    }
     return jsonify(produtos)
 
 
