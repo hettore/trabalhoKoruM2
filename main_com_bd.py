@@ -10,7 +10,7 @@ caminho = f"{os.path.dirname(__file__)}\\db\\produtos.db"
 def gerar_id():
     conn = sqlite3.connect(caminho)
     cursor = conn.cursor()
-    cursor.execute("SELECT seq FROM sqlite_sequence WHERE name='produtos")
+    cursor.execute("SELECT seq FROM sqlite_sequence WHERE name='produtos'")
     next_id = cursor.fetchone()[0]
     return next_id + 1
 
@@ -29,7 +29,7 @@ def criar_produto():
         conn.commit()
         conn.close()
         
-        return jsonify(obj)
+        return jsonify(obj), 201
     except Exception as ex:
         print(ex)
         return 0
