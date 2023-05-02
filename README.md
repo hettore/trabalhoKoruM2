@@ -27,3 +27,6 @@ Miguel de Jesus
 5 - DELETE/produtos/<id>
   a - Deleta um produto com um determinado id
 
+## Segunda e última entrega do Módulo - back-end
+
+#### Integrar as mesmas rotas com o banco de dados a fim de persistir os dados, deixando de usar o dicionário.
