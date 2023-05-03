@@ -82,7 +82,7 @@ def retornar_produto(id:int):
                 "fornecedor": fornecedor
                 }
     except:
-        return jsonify({'Mensagem': "Produto não encontrado"})
+        return jsonify({'Mensagem': "Produto não encontrado"}), 404
     
 #Atualiza os dados de um produto
 def atualizar_produto(id:int, nome, preco, peso, descricao, fornecedor):
@@ -135,26 +135,13 @@ def deletar_produto(id):
     except Exception:
         return jsonify({"Mensagem": "Produto não encontrado"}), 404
 
+# Instruções de como criar o banco e suas tabelas
+# if __name__ == '__main__':
+#     # Create the ‘products’ table if it doesn’t exist
+#     conn.execute('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, preco REAL, peso REAL, descricao TEXT, fornecedor TEXT)')
+
+
 app.run(debug=True)
 
-# nome = "Apple Watch 8"
-# preco = 8000.00
-# peso = 0.2
-# descricao = "Relógio inteligente Apple"
-# fornecedor = "Apple"
 
-# id = criar_produto(nome, preco, peso, descricao, fornecedor)
-# print(id)
-# print(retornar_produto(id))
 
-# id, nome, preco, peso, descricao, fornecedor = retornar_produto(id)
-# atualizar_produto(id, "Apple Watch 8 ULTRA", 10000.00, peso, descricao, fornecedor)
-
-# print(retornar_produto(id))
-# id, nome, preco, peso, descricao, fornecedor = retornar_produto(id)
-
-# print(retornar_produtos())
-
-# remover_produto(id)
-
-# print(retornar_produtos())
