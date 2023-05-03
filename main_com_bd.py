@@ -63,8 +63,8 @@ def retornar_produtos():
 @app.route('/product/<int:id>', methods=['GET'])
 def retornar_produto(id:int):
     try:
-        if id == 0:
-            return jsonify({'Mensagem': "Produto não encontrado"})
+        # if id == 0:
+        #     return jsonify({'Mensagem': "Produto não encontrado"})
         conn = sqlite3.connect(caminho)
         cursor = conn.cursor()
 
@@ -82,7 +82,7 @@ def retornar_produto(id:int):
                 "fornecedor": fornecedor
                 }
     except:
-        return False
+        return jsonify({'Mensagem': "Produto não encontrado"})
     
 #Atualiza os dados de um produto
 def atualizar_produto(id:int, nome, preco, peso, descricao, fornecedor):
@@ -100,12 +100,15 @@ def atualizar_produto(id:int, nome, preco, peso, descricao, fornecedor):
         return False
 @app.route('/product/<int:id>', methods=['PUT'])
 def atualizar_produto_id(id):
-    produto = retornar_produto(id)
-    if produto:
-        dados_atualizados = request.json
-        dados_atualizados["id"]=id
-        atualizar_produto(**dados_atualizados)
-        return jsonify(dados_atualizados)
+    try:
+        produto = retornar_produto(id)
+        if produto['id'] == id:
+            dados_atualizados = request.json
+            dados_atualizados["id"]=id
+            atualizar_produto(**dados_atualizados)
+            return jsonify(dados_atualizados) 
+    except Exception:
+        return jsonify({'Mensagem': "Produto não encontrado"})
 
     
 #Remove um produto
@@ -124,11 +127,12 @@ def remover_produto(id:int):
     
 @app.route('/product/<int:id>', methods=['DELETE'])
 def deletar_produto(id):
-    produto = retornar_produto(id)
-    if produto:
-        remover_produto(id)
-        return jsonify({"Mensagem": "produto deletado com sucesso"}, produto)
-    else:
+    try:
+        produto = retornar_produto(id)
+        if produto:
+            remover_produto(id)
+            return jsonify({"Mensagem": "produto deletado com sucesso"}, produto)
+    except Exception:
         return jsonify({"Mensagem": "Produto não encontrado"}), 404
 
 app.run(debug=True)
