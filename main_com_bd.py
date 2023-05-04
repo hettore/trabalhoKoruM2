@@ -25,11 +25,19 @@ def criar_produto():
         cursor = conn.cursor()
         sql_insert = "INSERT INTO produtos (nome_produto, preco_produto, peso_produto, descricao_produto, fornecedor_produto) values (?, ?, ?, ?, ? )"
         cursor.execute(sql_insert, (values))
-        produto_id = cursor.lastrowid
+        obj_id = cursor.lastrowid
+        produto = {
+                "id":obj_id,
+                "nome": obj['nome'],
+                "preco": obj['preco'],
+                "peso":obj['peso'],
+                "descricao": obj['descricao'],
+                "fornecedor": obj['fornecedor']
+                }
         conn.commit()
         conn.close()
         
-        return jsonify(obj), 201
+        return jsonify(produto), 201
     except Exception as ex:
         print(ex)
         return 0
