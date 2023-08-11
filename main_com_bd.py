@@ -114,7 +114,7 @@ def atualizar_produto_id(id):
             dados_atualizados = request.json
             dados_atualizados["id"]=id
             atualizar_produto(**dados_atualizados)
-            return jsonify(dados_atualizados) 
+            return jsonify(dados_atualizados), 200
     except Exception:
         return jsonify({'Mensagem': "Produto não encontrado"})
 
