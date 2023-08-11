@@ -5,12 +5,12 @@ import os
 caminho = f"{os.path.dirname(__file__)}\\db\\produtos.db"
 
 #Função para gerar um novo id
-def gerar_id():
-    conn = sqlite3.connect(caminho)
-    cursor = conn.cursor()
-    cursor.execute("SELECT seq FROM sqlite_sequence WHERE name='produtos'")
-    next_id = cursor.fetchone()[0]
-    return next_id + 1
+#def gerar_id():
+#    conn = sqlite3.connect(caminho)
+#    cursor = conn.cursor()
+#    cursor.execute("SELECT seq FROM sqlite_sequence WHERE name='produtos'")
+#    next_id = cursor.fetchone()[0]
+#    return next_id + 1
 
 def criando_produto():
         obj = request.json
